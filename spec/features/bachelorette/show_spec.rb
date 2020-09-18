@@ -16,7 +16,7 @@ RSpec.describe "Bachelorette Show Page", type: :feature do
 
     it "can see bachelorette specific information" do
       visit "/bachelorettes/#{@bachelorette_1.id}"
-      
+
       expect(page).to have_content(@bachelorette_1.name)
       expect(page).to have_content(@bachelorette_1.season_number)
       expect(page).to have_content(@bachelorette_1.season_description)
@@ -30,6 +30,8 @@ RSpec.describe "Bachelorette Show Page", type: :feature do
       expect(current_path).to eq("/bachelorettes/#{@bachelorette_1.id}/contestants")
 
       expect(page).to have_content(@contestant_1.name)
+      expect(page).to have_content(@contestant_1.age)
+      expect(page).to have_content(@contestant_1.hometown)
       expect(page).to have_content(@contestant_2.name)
 
       expect(page).to_not have_content(@contestant_3.name)
