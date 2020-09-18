@@ -1,0 +1,11 @@
+<h2><%= @bachelorette.name %></h2>
+<br>
+<ul>
+  <%= @bachelorette.season_number %>
+</ul>
+<ul>
+  <%= @bachelorette.season_description %>
+</ul>
+<ul>
+  <%= link_to "This Bachelorette's Contestants", "/bachelorettes/#{@bachelorette.id}/contestants"%>
+</ul>
