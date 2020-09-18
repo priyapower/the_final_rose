@@ -35,6 +35,15 @@ RSpec.describe "Bachelorette Show Page", type: :feature do
       expect(page).to have_content(@contestant_2.name)
 
       expect(page).to_not have_content(@contestant_3.name)
+
+      expect(page).to have_link(@contestant_1.name)
+    end
+
+    it "can see links for contestant pages" do
+      visit "/bachelorettes/#{@bachelorette_1.id}/contestants"
+
+      click_link(@contestant_1.name)
+      expect(current_path).to eq("/contestants/#{@contestant_1.id}")
     end
 
   end
