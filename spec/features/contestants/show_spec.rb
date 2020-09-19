@@ -22,7 +22,6 @@ RSpec.describe "Contestants Show Page", type: :feature do
 
     it "can see contestants information" do
       visit "/contestants/#{@contestant_4.id}"
-      save_and_open_page
       expect(page).to have_content(@contestant_4.name)
       expect(page).to have_content(@contestant_4.bachelorette.season_number)
       expect(page).to have_content(@contestant_4.bachelorette.season_description)
