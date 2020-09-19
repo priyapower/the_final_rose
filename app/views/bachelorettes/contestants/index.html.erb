@@ -2,7 +2,7 @@
 <br>
 <% @contestants.each do |contestant| %>
   <ul>
-    <%= "Contestant: #{contestant.name}" %>
+    <%= link_to "Contestant: #{contestant.name}", "/contestants/#{contestant.id}" %>
   </ul>
   <ul>
     <%= contestant.age %>
