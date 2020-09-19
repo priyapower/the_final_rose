@@ -1,4 +1,5 @@
 <h1>Contestants for Bachelorette: <%= @bachelorette.name %></h1>
+<h3>These contestants are from these hometowns: <%= @hometowns.to_sentence %></h3>
 <br>
 <% @contestants.each do |contestant| %>
   <ul>
