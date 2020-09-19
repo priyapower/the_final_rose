@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Bachelorette Show Page", type: :feature do
+RSpec.describe "Bachelorette Nested Contestants Page", type: :feature do
   describe "As a visitor" do
     before :each do
       @bachelorette_1 = Bachelorette.create!(name: "Daniel", season_number: 3, season_description: "An amazing human that likes to give magic to all")
@@ -14,12 +14,28 @@ RSpec.describe "Bachelorette Show Page", type: :feature do
       @contestant_6 = @bachelorette_3.contestants.create!(name: "Angela", age: 20, hometown: "Baltimore")
     end
 
-    it "can see bachelorette specific information" do
+    it "can see a link for contestants and go to the bachelorette specific contestants show page" do
       visit "/bachelorettes/#{@bachelorette_1.id}"
+      expect(page).to have_link("This Bachelorette's Contestants")
 
-      expect(page).to have_content(@bachelorette_1.name)
-      expect(page).to have_content(@bachelorette_1.season_number)
-      expect(page).to have_content(@bachelorette_1.season_description)
+      click_link("This Bachelorette's Contestants")
+      expect(current_path).to eq("/bachelorettes/#{@bachelorette_1.id}/contestants")
+
+      expect(page).to have_content(@contestant_1.name)
+      expect(page).to have_content(@contestant_1.age)
+      expect(page).to have_content(@contestant_1.hometown)
+      expect(page).to have_content(@contestant_2.name)
+
+      expect(page).to_not have_content(@contestant_3.name)
+
+      expect(page).to have_link(@contestant_1.name)
+    end
+
+    it "can see links for contestant pages" do
+      visit "/bachelorettes/#{@bachelorette_1.id}/contestants"
+
+      click_link(@contestant_1.name)
+      expect(current_path).to eq("/contestants/#{@contestant_1.id}")
     end
 
   end
