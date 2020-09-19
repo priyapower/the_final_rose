@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Bachelorette Nested Contestants Page", type: :feature do
+RSpec.describe "Bachelorette Nested Contestants Index Page", type: :feature do
   describe "As a visitor" do
     before :each do
       @bachelorette_1 = Bachelorette.create!(name: "Daniel", season_number: 3, season_description: "An amazing human that likes to give magic to all")
@@ -12,6 +12,8 @@ RSpec.describe "Bachelorette Nested Contestants Page", type: :feature do
       @contestant_4 = @bachelorette_2.contestants.create!(name: "Judith", age: 20, hometown: "New York")
       @contestant_5 = @bachelorette_3.contestants.create!(name: "Dani", age: 23, hometown: "San Diego")
       @contestant_6 = @bachelorette_3.contestants.create!(name: "Angela", age: 20, hometown: "Baltimore")
+      @contestant_7 = @bachelorette_3.contestants.create!(name: "Kiera", age: 22, hometown: "Baltimore")
+      @contestant_8 = @bachelorette_3.contestants.create!(name: "Kiera", age: 22, hometown: "Philadelphia")
     end
 
     it "can see a link for contestants and go to the bachelorette specific contestants show page" do
@@ -36,6 +38,16 @@ RSpec.describe "Bachelorette Nested Contestants Page", type: :feature do
 
       click_link(@contestant_1.name)
       expect(current_path).to eq("/contestants/#{@contestant_1.id}")
+    end
+    # 
+    # it "can see unique hometowns of contestants" do
+    #   visit "/bachelorettes/#{@bachelorette_3.id}/contestants"
+    #   expect(page).to have_content("These contestants are from these hometowns: Baltimore and San Diego")
+    # end
+
+    it "can see unique hometowns of contestants" do
+      visit "/bachelorettes/#{@bachelorette_3.id}/contestants"
+      expect(page).to have_content("These contestants are from these hometowns: Baltimore, Philadelphia, and San Diego")
     end
 
   end
